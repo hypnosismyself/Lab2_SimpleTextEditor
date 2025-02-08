@@ -1,0 +1,10 @@
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\bin\Debug\Lab2_SimpleTextEditor.exe.config
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\bin\Debug\Lab2_SimpleTextEditor.exe
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\bin\Debug\Lab2_SimpleTextEditor.pdb
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.csproj.AssemblyReference.cache
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.Properties.Resources.resources
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.csproj.GenerateResource.cache
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.csproj.CoreCompileInputs.cache
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.exe
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.pdb
+D:\Study\ВЫШКА\Технологии программирования\part_2\Lab2_SimpleTextEditor\obj\Debug\Lab2_SimpleTextEditor.EditorView.resources
