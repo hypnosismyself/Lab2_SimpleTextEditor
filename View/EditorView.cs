@@ -49,8 +49,7 @@ namespace Lab2_SimpleTextEditor
         private const string _FILE_FILTER = 
             "Тектовые файлы (*.txt)|*.txt|" +
             "Конфигурационные файлы (*.ini; *.toml)|*.ini;*.toml|" +
-            "Логовые файлы (*.log|*.log)|" +
-            "Все файлы (*.*)|*.*";
+            "Логовые файлы (*.log)|*.log";
 
         public EditorView()
         {
@@ -109,7 +108,7 @@ namespace Lab2_SimpleTextEditor
             else
             {
                 // иначе показываем диалог отмены сохранения
-                if (ShowSaveAcceptanceDialog() == DialogResult.No)
+                if (ShowSaveAcceptanceDialog() == DialogResult.Yes)
                 {
                     // если отказываемся от сохранения
                     // открываем диалог открытия файла
@@ -143,6 +142,10 @@ namespace Lab2_SimpleTextEditor
                 if (ShowSaveAcceptanceDialog() == DialogResult.No)
                 {
                     Application.Exit();
+                }
+                else
+                {
+                    SaveAsFileOption.PerformClick();
                 }
             }
         }        
@@ -226,8 +229,6 @@ namespace Lab2_SimpleTextEditor
         // При клике "О программе"
         private void AboutOption_Click(object sender, EventArgs e)
         {
-
-
             MessageBox.Show
             (
                 "Простой блокнот | Автор Никольский В.А. ЗЦИС-27",
@@ -241,6 +242,7 @@ namespace Lab2_SimpleTextEditor
         private void TextField_TextChanged(object sender, EventArgs e)
         {
             string FormatName = Text;
+            _isFileSaved = false;
 
             if (FormatName.Substring(FormatName.Length - 1) != "*")
             {
@@ -297,6 +299,7 @@ namespace Lab2_SimpleTextEditor
             FilePath = null;
             _isFileSaved = false;
             TextField.Clear();
+            RefreshFormName();
         }
 
         // Служебный метод проверки того, что файл Безымянный
@@ -375,6 +378,7 @@ namespace Lab2_SimpleTextEditor
 
                     // перерисовываем текст формы
                     RefreshFormName();
+                    _isFileSaved = true;
                 }
             }
         }
@@ -394,6 +398,7 @@ namespace Lab2_SimpleTextEditor
                 InitialDirectory = "c:\\",
                 Filter = _FILE_FILTER,
                 RestoreDirectory = false,
+                FileName = "Безымянный.txt",
                 OverwritePrompt = true
             };
 
@@ -443,6 +448,7 @@ namespace Lab2_SimpleTextEditor
 
                     // перерисовываем текст формы
                     RefreshFormName();
+                    _isFileSaved = true;
                 }
             }
         }

@@ -101,7 +101,7 @@ namespace Lab2_SimpleTextEditor
             // arg: color - цвет Color
             // return: строковый цвет в формате HEX
 
-            return color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+            return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
         }
 
         // Служебный метод конвертации цвета из string (HEX) в Color
@@ -111,8 +111,8 @@ namespace Lab2_SimpleTextEditor
             // return: цвет Color
 
             int r = Convert.ToInt32(hexColor.Substring(1, 2), 16);
-            int g = Convert.ToInt32(hexColor.Substring(2, 2), 16);
-            int b = Convert.ToInt32(hexColor.Substring(4, 2), 16);
+            int g = Convert.ToInt32(hexColor.Substring(3, 2), 16);
+            int b = Convert.ToInt32(hexColor.Substring(5, 2), 16);
 
             return Color.FromArgb(255, r, g, b);
         }
@@ -128,8 +128,8 @@ namespace Lab2_SimpleTextEditor
                 EditorView.FontOptions.Size.ToString(),
                 EditorView.FontOptions.Bold.ToString(),
                 EditorView.FontOptions.Italic.ToString(),
-                EditorView.FontOptions.Strikeout.ToString(),
-                EditorView.Font.Underline.ToString()
+                EditorView.Font.Underline.ToString(),
+                EditorView.FontOptions.Strikeout.ToString()
             };
 
             for (int i = 0; i < font_options.Length; i++)

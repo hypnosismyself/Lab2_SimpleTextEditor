@@ -13,7 +13,7 @@ namespace Lab2_SimpleTextEditor.Model
         private const char _CONFIG_SPLIT_CHAR = '=';
 
         // Путь к конфигу
-        private const string _CONFIG_PATH = "..\\config.ini";
+        private const string _CONFIG_PATH = "config.ini";
 
         // Список ключей
         private readonly List<string> _CONFIG_KEYS = new List<string>()
