@@ -54,6 +54,19 @@ namespace Lab2_SimpleTextEditor
         public EditorView()
         {
             InitializeComponent();
+
+            // настраиваем компонент открытия
+            OpenFileDialog.InitialDirectory = "c:\\";
+            OpenFileDialog.Filter = _FILE_FILTER;
+            OpenFileDialog.RestoreDirectory = false;
+            OpenFileDialog.FileName = "";
+
+            // настраиваем компонент сохранения
+            SaveFileDialog.InitialDirectory = "c:\\";
+            SaveFileDialog.Filter = _FILE_FILTER;
+            SaveFileDialog.RestoreDirectory = false;
+            SaveFileDialog.FileName = "Безымянный.txt";
+            SaveFileDialog.OverwritePrompt = true;
         }
 
         /*
@@ -155,7 +168,7 @@ namespace Lab2_SimpleTextEditor
         {
             ConfigPresenter = new ConfigManagerPresenter(new ConfigManager(), this);
 
-            using (FontDialog FontDialog = new FontDialog())
+            using (FontDialog)
             {
                 try
                 {
@@ -177,11 +190,9 @@ namespace Lab2_SimpleTextEditor
         // При клике "Цвет шрифта"
         private void SetFontColorOption_Click(object sender, EventArgs e)
         {
-            ColorDialog ColorDialog = new ColorDialog();
-
             ConfigPresenter = new ConfigManagerPresenter(new ConfigManager(), this);
 
-            using (FontDialog FontDialog = new FontDialog())
+            using (ColorDialog)
             {
                 try
                 {
@@ -203,11 +214,9 @@ namespace Lab2_SimpleTextEditor
         // При клике "Цвет фона"
         private void BackgroundColorOption_Click(object sender, EventArgs e)
         {
-            ColorDialog ColorDialog = new ColorDialog();
-
             ConfigPresenter = new ConfigManagerPresenter(new ConfigManager(), this);
 
-            using (FontDialog FontDialog = new FontDialog())
+            using (ColorDialog)
             {
                 try
                 {
@@ -296,7 +305,7 @@ namespace Lab2_SimpleTextEditor
         // Служебный метод создания пустого файла на интерфейсе
         private void CreateNamelessTemplate()
         {
-            FilePath = null;
+            FilePath = "";
             _isFileSaved = false;
             TextField.Clear();
             RefreshFormName();
@@ -307,7 +316,7 @@ namespace Lab2_SimpleTextEditor
         {
             // return: файл является шаблоном?
 
-            return FilePath == null && _isFileSaved == false;
+            return FilePath == "" && _isFileSaved == false;
         }
 
         // Служебный метод проверки конфига на БЛ
@@ -330,7 +339,7 @@ namespace Lab2_SimpleTextEditor
         // Служебный метод переименования формы
         private void RefreshFormName()
         {
-            if (FilePath != null)
+            if (FilePath != "")
             {
                 // если есть путь к файлу
                 // показываем путь
@@ -359,14 +368,6 @@ namespace Lab2_SimpleTextEditor
         {
             FilePresenter = new FileManagerPresenter(new FileManager(), this);
 
-            // инициализация диалога открытия
-            OpenFileDialog OpenFileDialog = new OpenFileDialog
-            {
-                InitialDirectory = "c:\\",
-                Filter = _FILE_FILTER,
-                RestoreDirectory = false
-            };
-
             using (OpenFileDialog)
             {
                 if (OpenFileDialog.ShowDialog() == DialogResult.OK)
@@ -391,25 +392,11 @@ namespace Lab2_SimpleTextEditor
             string temp_path;
             FilePresenter = new FileManagerPresenter(new FileManager(), this);
 
-            // инициализация диалога сохранения файла
-            SaveFileDialog SaveFileDialog = new SaveFileDialog
-            {
-                Title = command,
-                InitialDirectory = "c:\\",
-                Filter = _FILE_FILTER,
-                RestoreDirectory = false,
-                FileName = "Безымянный.txt",
-                OverwritePrompt = true
-            };
+            SaveFileDialog.Title = command;
 
-            if (FilePath != null && FileExists(FilePath))
+            if (command == "Сохранить как..." || IsTemplate())
             {
-                // если есть путь к файлу и файл существует
-                // сохраняем в него текст без вызова диалога
-                FileSave(FilePath, TextField.Text);
-            }
-            else
-            {
+                // принудительно сохраняем по кнопке
                 using (SaveFileDialog)
                 {
                     if (SaveFileDialog.ShowDialog() == DialogResult.OK)
@@ -422,6 +409,12 @@ namespace Lab2_SimpleTextEditor
                         FileSave(temp_path, TextField.Text);
                     }
                 }
+            }
+            else if (FilePath != "" && FileExists(FilePath))
+            {
+                // если есть путь к файлу и файл существует
+                // сохраняем в него текст без вызова диалога
+                FileSave(FilePath, TextField.Text);
             }
         }
 
